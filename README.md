@@ -35,4 +35,4 @@ Make sure you have Node.js installed on your machine.
 
 1. **Clone the repository:**
    ```sh
-   git clone [https://github.com/](https://github.com/)[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME].git
+   git clone https://github.com/RashmikaMadaela/movie-watchlist.git

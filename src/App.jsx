@@ -1,42 +1,37 @@
 import { useState, useEffect } from 'react';
-import { fetchPopularMovies, searchMovies } from './services/tmdb'; // Import searchMovies
-import MovieCard from './components/MovieCard';
-import SearchBar from './components/SearchBar'; // Import SearchBar
+import { Outlet, Link } from 'react-router-dom'; // Import Outlet and Link
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [listTitle, setListTitle] = useState('Popular Movies'); // State for the title
+  const [watchlist, setWatchlist] = useState([]);
 
-  // Fetch popular movies on initial load
-  useEffect(() => {
-    const getMovies = async () => {
-      const popularMovies = await fetchPopularMovies();
-      setMovies(popularMovies);
-    };
-    getMovies();
-  }, []);
-
-  // This function will be passed to the SearchBar
-  const handleSearch = async (query) => {
-    const searchResults = await searchMovies(query);
-    setMovies(searchResults);
-    setListTitle(`Search Results for: "${query}"`); // Update the title
+  // This function adds a movie to the watchlist
+  const addMovieToWatchlist = (movieToAdd) => {
+    const isAlreadyAdded = watchlist.some(movie => movie.id === movieToAdd.id);
+    if (!isAlreadyAdded) {
+      setWatchlist(prevWatchlist => [...prevWatchlist, movieToAdd]);
+    } else {
+      alert(`${movieToAdd.title} is already in your watchlist!`);
+    }
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-4 md:p-8">
-      <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Movie Watchlist</h1>
-      
-      {/* Add the SearchBar component */}
-      <SearchBar onSearch={handleSearch} />
-      
-      <h2 className="text-2xl font-semibold mb-6">{listTitle}</h2>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
+    <div className="bg-gray-900 text-white min-h-screen font-sans">
+      <header className="p-4 shadow-md shadow-gray-800">
+        <nav className="container mx-auto flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold text-cyan-400">
+            MovieApp
+          </Link>
+          <Link to="/watchlist" className="bg-cyan-600 text-white font-semibold py-2 px-4 rounded hover:bg-cyan-700 transition-colors">
+            My Watchlist <span className="bg-cyan-800 text-xs rounded-full px-2 py-1 ml-1">{watchlist.length}</span>
+          </Link>
+        </nav>
+      </header>
+
+      <main className="p-4 md:p-8">
+        {/* The Outlet component renders the current page (HomePage or WatchlistPage) */}
+        {/* We pass state and functions down to them via the 'context' prop */}
+        <Outlet context={{ watchlist, addMovieToWatchlist }} />
+      </main>
     </div>
   );
 }

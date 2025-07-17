@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Outlet, Link } from 'react-router-dom'; // Import Outlet and Link
+import { Outlet, Link } from 'react-router-dom';
 
 function App() {
-  const [watchlist, setWatchlist] = useState([]);
+  // We'll load the initial state from localStorage
+  const [watchlist, setWatchlist] = useState(() => {
+    const savedWatchlist = localStorage.getItem('watchlist');
+    return savedWatchlist ? JSON.parse(savedWatchlist) : [];
+  });
 
-  // This function adds a movie to the watchlist
+  // useEffect to save to localStorage whenever the watchlist changes
+  useEffect(() => {
+    localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  }, [watchlist]);
+
+
   const addMovieToWatchlist = (movieToAdd) => {
     const isAlreadyAdded = watchlist.some(movie => movie.id === movieToAdd.id);
     if (!isAlreadyAdded) {
@@ -12,6 +21,13 @@ function App() {
     } else {
       alert(`${movieToAdd.title} is already in your watchlist!`);
     }
+  };
+
+  // 1. Create the function to remove a movie
+  const removeMovieFromWatchlist = (movieIdToRemove) => {
+    setWatchlist(prevWatchlist => 
+      prevWatchlist.filter(movie => movie.id !== movieIdToRemove)
+    );
   };
 
   return (
@@ -28,9 +44,11 @@ function App() {
       </header>
 
       <main className="p-4 md:p-8">
-        {/* The Outlet component renders the current page (HomePage or WatchlistPage) */}
-        {/* We pass state and functions down to them via the 'context' prop */}
-        <Outlet context={{ watchlist, addMovieToWatchlist }} />
+        <Outlet context={{ 
+          watchlist, 
+          addMovieToWatchlist, 
+          removeMovieFromWatchlist // 2. Pass the new function down
+        }} />
       </main>
     </div>
   );

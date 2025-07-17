@@ -3,7 +3,8 @@ import { useOutletContext } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 
 function WatchlistPage() {
-  const { watchlist, addMovieToWatchlist } = useOutletContext(); // Get the watchlist from the context
+  // 1. Get the remove function from the context
+  const { watchlist, removeMovieFromWatchlist } = useOutletContext(); 
 
   return (
     <div>
@@ -14,7 +15,10 @@ function WatchlistPage() {
             <MovieCard 
               key={movie.id} 
               movie={movie} 
-              onAddToWatchlist={addMovieToWatchlist} // We'll replace this soon
+              // 2. Pass the remove function instead of the add function
+              onRemoveFromWatchlist={removeMovieFromWatchlist}
+              // 3. Add a prop to identify this as a watchlist card
+              isWatchlist={true}
             />
           ))}
         </div>

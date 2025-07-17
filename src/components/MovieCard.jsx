@@ -2,8 +2,12 @@ import React from 'react';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-// 1. Receive the 'onAddToWatchlist' function as a prop
-function MovieCard({ movie, onAddToWatchlist }) {
+function MovieCard({ 
+  movie, 
+  onAddToWatchlist, 
+  onRemoveFromWatchlist, 
+  isWatchlist = false // Default isWatchlist to false
+}) {
   const posterUrl = movie.poster_path 
     ? `${IMAGE_BASE_URL}${movie.poster_path}`
     : 'https://via.placeholder.com/500x750?text=No+Image';
@@ -23,13 +27,25 @@ function MovieCard({ movie, onAddToWatchlist }) {
           Release Date: {movie.release_date}
         </p>
 
-        {/* 2. Add the button at the bottom */}
-        <button
-          onClick={() => onAddToWatchlist(movie)}
-          className="mt-auto w-full bg-cyan-600 text-white font-semibold py-2 rounded hover:bg-cyan-700 transition-colors"
-        >
-          Add to Watchlist
-        </button>
+        <div className="mt-auto">
+          {isWatchlist ? (
+            // If it's on the watchlist, show the "Remove" button
+            <button
+              onClick={() => onRemoveFromWatchlist(movie.id)}
+              className="w-full bg-red-600 text-white font-semibold py-2 rounded hover:bg-red-700 transition-colors"
+            >
+              Remove
+            </button>
+          ) : (
+            // Otherwise, show the "Add to Watchlist" button
+            <button
+              onClick={() => onAddToWatchlist(movie)}
+              className="w-full bg-cyan-600 text-white font-semibold py-2 rounded hover:bg-cyan-700 transition-colors"
+            >
+              Add to Watchlist
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

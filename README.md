@@ -1,12 +1,36 @@
-# React + Vite
+# Movie Watchlist App 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive web application for Browse movies and managing a personal watchlist, built with React, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+**[Link to Live Demo]** ![Movie Watchlist App Screenshot](...) ## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Browse & Discover**: View a list of currently popular movies on the homepage.
+- **Powerful Search**: Instantly search for any movie by title.
+- **Detailed Information**: Click on any movie to see a detailed view with its plot, rating, runtime, genres, and more.
+- **Personal Watchlist**: Add movies to a personal watchlist and remove them.
+- **Persistent Storage**: Your watchlist is automatically saved to your browser's local storage.
+- **Modern UI**: A clean, responsive user interface with skeleton loading states for an improved user experience.
+- **Dynamic Routing**: Built with React Router for seamless navigation between pages.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React.js
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router
+- **API**: The Movie Database (TMDb) API
+
+## 🚀 Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Make sure you have Node.js installed on your machine.
+- [Node.js](https://nodejs.org/)
+
+### Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone [https://github.com/](https://github.com/)[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME].git

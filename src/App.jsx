@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import logo from './assets/logo.svg';
+import Footer from './components/Footer.jsx';
 
 function App() {
   // We'll load the initial state from localStorage
@@ -34,11 +36,15 @@ function App() {
     <div className="bg-gray-900 text-white min-h-screen font-sans">
       <header className="p-4 shadow-md shadow-gray-800">
         <nav className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-cyan-400">
-            MovieApp
+          
+          <Link to="/" className="flex items-center gap-2">
+          <img src={logo} alt="MovieApp logo" className="h-8 w-8" />
+            <span className="text-2xl font-bold text-cyan-400">
+               Movie Watchlist
+            </span>
           </Link>
           <Link to="/watchlist" className="bg-cyan-600 text-white font-semibold py-2 px-4 rounded hover:bg-cyan-700 transition-colors">
-            My Watchlist <span className="bg-cyan-800 text-xs rounded-full px-2 py-1 ml-1">{watchlist.length}</span>
+            <span className="text-white">My Watchlist </span><span className="bg-cyan-800 text-xs rounded-full px-2 py-1 ml-1">{watchlist.length}</span>
           </Link>
         </nav>
       </header>
@@ -50,6 +56,7 @@ function App() {
           removeMovieFromWatchlist // 2. Pass the new function down
         }} />
       </main>
+      <Footer />
     </div>
   );
 }

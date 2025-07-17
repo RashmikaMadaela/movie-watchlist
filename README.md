@@ -2,7 +2,7 @@
 
 A modern and responsive web application for Browse movies and managing a personal watchlist, built with React, Vite, and Tailwind CSS.
 
-**https://rashmikamadaela.github.io/movie-watchlist/** 
+**LIVE DEMO - https://rashmikamadaela.github.io/movie-watchlist/** 
 
 ## ✨ Features
 

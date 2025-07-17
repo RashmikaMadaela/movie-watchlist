@@ -8,7 +8,7 @@ import WatchlistPage from './pages/WatchlistPage.jsx';
 import './index.css';
 
 // Define the application's routes
-const router = createBrowserRouter([
+const routes = createBrowserRouter([
   {
     path: '/',
     element: <App />, // App is now the main layout
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+// Pass the routes AND an options object with the basename
+const router = createBrowserRouter(routes, {
+  basename: "/movie-watchlist/", // Replace with your actual repo name
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

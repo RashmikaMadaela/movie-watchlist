@@ -2,7 +2,9 @@
 
 A modern and responsive web application for Browse movies and managing a personal watchlist, built with React, Vite, and Tailwind CSS.
 
-**[Link to Live Demo]** ![Movie Watchlist App Screenshot](...) ## ✨ Features
+**[Link to Live Demo]** 
+
+## ✨ Features
 
 - **Browse & Discover**: View a list of currently popular movies on the homepage.
 - **Powerful Search**: Instantly search for any movie by title.

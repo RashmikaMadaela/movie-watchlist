@@ -28,7 +28,7 @@ function MovieDetailPage() {
   if (isLoading) {
     // ... skeleton loader code remains the same
     return (
-      <div className="container mx-auto p-4 flex flex-col md:flex-row gap-8 animate-pulse">
+      <div className="w-full p-4 flex flex-col md:flex-row gap-8 animate-pulse max-w-7xl mx-auto">
         <div className="bg-gray-700 w-full md:w-1/3 h-96 rounded-lg"></div>
         <div className="md:w-2/3">
           <div className="bg-gray-700 h-10 w-3/4 mb-4 rounded"></div>
@@ -41,7 +41,7 @@ function MovieDetailPage() {
   }
 
   if (!movie) {
-    return <div className="text-center text-xl mt-10">Movie not found.</div>;
+    return <div className="text-center text-xl mt-10 w-full">Movie not found.</div>;
   }
 
   const posterUrl = movie.poster_path
@@ -49,7 +49,7 @@ function MovieDetailPage() {
     : 'https://via.placeholder.com/500x750?text=No+Image';
 
   return (
-    <div className="container mx-auto p-4 flex flex-col md:flex-row gap-8">
+    <div className="w-full p-4 flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
       <img src={posterUrl} alt={movie.title} className="w-full md:w-1/3 rounded-lg shadow-lg self-start" />
       <div className="md:w-2/3">
         <h1 className="text-4xl font-bold mb-2">{movie.title}</h1>

@@ -7,23 +7,23 @@ function WatchlistPage() {
   const { watchlist, removeMovieFromWatchlist } = useOutletContext(); 
 
   return (
-    <div className="container mx-auto p-4"> 
+    <div className="w-full p-4 flex flex-col items-center"> 
       <h2 className="text-3xl font-bold mb-6">My Watchlist</h2>
       {watchlist.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full max-w-7xl mx-auto">
           {watchlist.map(movie => (
             <MovieCard 
               key={movie.id} 
               movie={movie} 
-              // 2. Pass the remove function instead of the add function
               onRemoveFromWatchlist={removeMovieFromWatchlist}
-              // 3. Add a prop to identify this as a watchlist card
               isWatchlist={true}
             />
           ))}
         </div>
       ) : (
-        <p className="text-gray-400">Your watchlist is empty. Add some movies!</p>
+        <div className="flex flex-col items-center justify-center w-full min-h-[40vh]">
+          <p className="text-gray-400 text-xl">Your watchlist is empty. Add some movies!</p>
+        </div>
       )}
     </div>
   );

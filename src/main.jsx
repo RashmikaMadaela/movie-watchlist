@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-// Import only the components you have created
+// Import all your components
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import WatchlistPage from './pages/WatchlistPage.jsx';
+import MovieDetailPage from './pages/MovieDetailPage.jsx'; // Import the new page
+import ErrorPage from './pages/ErrorPage.jsx';           // Import the error page
 import './index.css';
 
-// Define the routes for the pages that exist
 const routes = [
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />, // Add the errorElement here
     children: [
       {
         index: true,
@@ -22,16 +24,18 @@ const routes = [
         path: 'watchlist',
         element: <WatchlistPage />,
       },
+      {
+        path: 'movie/:movieId', // This is our new dynamic route
+        element: <MovieDetailPage />,
+      },
     ],
   },
 ];
 
-// Create the router with the correct basename for GitHub Pages
 const router = createBrowserRouter(routes, {
-  basename: "/movie-watchlist/",
+  basename: "/movie-watchlist/", // Your repo name
 });
 
-// Render the application
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />

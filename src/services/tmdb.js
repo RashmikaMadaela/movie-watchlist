@@ -29,3 +29,17 @@ export const searchMovies = async (query) => {
     return [];
   }
 };
+
+export const fetchMovieDetails = async (movieId) => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/movie/${movieId}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch movie details:", error);
+    return null; // Return null on error
+  }
+};

@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useOutletContext } from 'react-router-dom';
 import { fetchMovieDetails } from '../services/tmdb';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 function MovieDetailPage() {
-  const { movieId } = useParams(); // Get the movieId from the URL
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // 1. Get the watchlist state and functions from the context
+  const { watchlist, addMovieToWatchlist, removeMovieFromWatchlist } = useOutletContext();
 
   useEffect(() => {
     const getDetails = async () => {
@@ -17,10 +20,13 @@ function MovieDetailPage() {
       setIsLoading(false);
     };
     getDetails();
-  }, [movieId]); // Re-run this effect if the movieId changes
+  }, [movieId]);
+
+  // This check has to happen after the loading is complete and the movie exists
+  const isMovieInWatchlist = movie ? watchlist.some(item => item.id === movie.id) : false;
 
   if (isLoading) {
-    // A simple skeleton loader for the detail page
+    // ... skeleton loader code remains the same
     return (
       <div className="container mx-auto p-4 flex flex-col md:flex-row gap-8 animate-pulse">
         <div className="bg-gray-700 w-full md:w-1/3 h-96 rounded-lg"></div>
@@ -44,17 +50,36 @@ function MovieDetailPage() {
 
   return (
     <div className="container mx-auto p-4 flex flex-col md:flex-row gap-8">
-      <img src={posterUrl} alt={movie.title} className="w-full md:w-1/3 rounded-lg shadow-lg" />
+      <img src={posterUrl} alt={movie.title} className="w-full md:w-1/3 rounded-lg shadow-lg self-start" />
       <div className="md:w-2/3">
         <h1 className="text-4xl font-bold mb-2">{movie.title}</h1>
         <p className="text-gray-400 italic mb-4">{movie.tagline}</p>
-        
-        <div className="flex items-center mb-4">
+
+        <div className="flex items-center mb-6">
           <span className="text-yellow-400 font-bold text-lg mr-4">⭐ {movie.vote_average.toFixed(1)} / 10</span>
           <span className="text-gray-300">{movie.runtime} min</span>
         </div>
+        
+        {/* 2. Add the conditional button here */}
+        <div className="mb-6">
+          {isMovieInWatchlist ? (
+            <button 
+              onClick={() => removeMovieFromWatchlist(movie.id)}
+              className="w-full md:w-auto bg-red-600 text-white font-semibold py-2 px-6 rounded hover:bg-red-700 transition-colors"
+            >
+              Remove from Watchlist
+            </button>
+          ) : (
+            <button 
+              onClick={() => addMovieToWatchlist(movie)}
+              className="w-full md:w-auto bg-cyan-600 text-white font-semibold py-2 px-6 rounded hover:bg-cyan-700 transition-colors"
+            >
+              Add to Watchlist
+            </button>
+          )}
+        </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           {movie.genres.map(genre => (
             <span key={genre.id} className="bg-gray-700 text-sm rounded-full px-3 py-1 mr-2 mb-2 inline-block">
               {genre.name}

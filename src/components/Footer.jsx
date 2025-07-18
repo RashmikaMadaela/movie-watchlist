@@ -4,7 +4,7 @@ function Footer() {
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
 
   return (
-    <footer className="bg-gray-800 text-gray-400 text-center p-6 mt-auto">
+    <footer className="bg-gray-800 text-gray-400 text-center p-6">
       <div className="container mx-auto">
         <p>&copy; {currentYear} Movie Watchlist by Rashmika Madaela. All Rights Reserved.</p>
         <p className="text-sm mt-1">

@@ -49,7 +49,7 @@ function App() {
         </nav>
       </header>
 
-      <main className="p-4 md:p-8">
+      <main className="p-4 md:p-8 flex-grow">
         <Outlet context={{ 
           watchlist, 
           addMovieToWatchlist, 

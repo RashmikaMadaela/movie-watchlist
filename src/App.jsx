@@ -33,28 +33,33 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen font-sans flex flex-col min-h-screen">
-      <header className="p-4 shadow-md shadow-gray-800">
+    <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-cyan-950 text-white min-h-screen font-sans flex flex-col">
+      <header className="p-4 shadow-lg shadow-cyan-900/30 bg-gradient-to-r from-gray-900 via-gray-800 to-cyan-900">
         <nav className="container mx-auto flex justify-between items-center">
           
-          <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="MovieApp logo" className="h-8 w-8" />
-            <span className="text-2xl font-bold text-cyan-400">
-               Movie Watchlist
+          <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+            <img src={logo} alt="MovieApp logo" className="h-9 w-9 drop-shadow-md" />
+            <span className="text-2xl font-extrabold text-cyan-400 tracking-tight">
+              Movie Watchlist
             </span>
           </Link>
-          <Link to="/watchlist" className="bg-cyan-600 text-white font-semibold py-2 px-4 rounded hover:bg-cyan-700 transition-colors">
-            <span className="text-white">My Watchlist </span><span className="bg-cyan-800 text-xs rounded-full px-2 py-1 ml-1">{watchlist.length}</span>
+          <Link to="/watchlist" className="relative bg-cyan-700 text-white font-extrabold py-2 px-6 rounded-lg shadow-md hover:bg-cyan-600 transition-colors flex items-center gap-2">
+            <span className="drop-shadow-sm">My Watchlist</span>
+            <span className="ml-2 px-2 py-0.5 rounded-full bg-white text-cyan-800 font-bold text-xs border border-cyan-400 shadow-sm min-w-[1.5rem] text-center">
+              {watchlist.length}
+            </span>
           </Link>
         </nav>
       </header>
 
-      <main className="p-4 md:p-8 flex-grow">
-        <Outlet context={{ 
-          watchlist, 
-          addMovieToWatchlist, 
-          removeMovieFromWatchlist // 2. Pass the new function down
-        }} />
+      <main className="flex-grow flex justify-center items-start p-4 md:p-8">
+        <div className="w-full max-w-7xl bg-gray-900/80 rounded-2xl shadow-xl p-4 md:p-12 mt-4">
+          <Outlet context={{ 
+            watchlist, 
+            addMovieToWatchlist, 
+            removeMovieFromWatchlist // 2. Pass the new function down
+          }} />
+        </div>
       </main>
       <Footer />
     </div>
